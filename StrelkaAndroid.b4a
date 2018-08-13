@@ -1,0 +1,139 @@
+﻿Version=6.5
+NumberOfModules=2
+Module1=Balance
+Module2=Starter
+Build1=Default,com.serogen.strelkabalance
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: http://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="9" android:targetSdkVersion="24"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~SetActivityAttribute(main, android:theme, @android:style/Theme.Translucent.NoTitleBar)~\n~'End of default text.~\n~
+IconFile=
+NumberOfFiles=4
+File1=BalanceLayout.bal
+File2=BaseLayout.bal
+File3=hoku_mbd2.png
+File4=refresh_button.png
+NumberOfLibraries=4
+Library1=core
+Library2=okhttputils2
+Library3=json
+Library4=stringutils
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Баланс карты Стрелка
+	#VersionCode: 1
+	#VersionName: 1.0
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: true
+	#IncludeTitle: false
+#End Region
+
+Sub Process_Globals
+	
+End Sub
+
+Sub Globals
+	Dim Button1 As Button
+	Dim EditText1 As EditText
+	Dim Label1 As Label
+	Dim ImageView1 As ImageView
+End Sub
+Sub SetButtonTextSize(lbl2 As Button, txt2 As String, MaxFontSize As Float, MinFontSize As Float)
+	Dim FontSize = MaxFontSize As Float
+	Dim Height As Int
+	Dim stu As StringUtils
+    
+	lbl2.TextSize = FontSize
+	Height = stu.MeasureMultilineTextHeight(lbl2, txt2)
+	Do While Height > lbl2.Height And FontSize > MinFontSize
+		FontSize = FontSize - 1
+		lbl2.TextSize = FontSize
+		Height = stu.MeasureMultilineTextHeight(lbl2, txt2)
+	Loop
+End Sub
+Sub SetEditTextSize(lbl2 As EditText, txt2 As String, MaxFontSize As Float, MinFontSize As Float)
+	Dim FontSize = MaxFontSize As Float
+	Dim Height As Int
+	Dim stu As StringUtils
+    
+	lbl2.TextSize = FontSize
+	Height = stu.MeasureMultilineTextHeight(lbl2, txt2)
+	Do While Height > lbl2.Height And FontSize > MinFontSize
+		FontSize = FontSize - 1
+		lbl2.TextSize = FontSize
+		Height = stu.MeasureMultilineTextHeight(lbl2, txt2)
+	Loop
+End Sub
+Sub SetLabelTextSize(lbl2 As Label, txt2 As String, MaxFontSize As Float, MinFontSize As Float)
+	Dim FontSize = MaxFontSize As Float
+	Dim Height As Int
+	Dim stu As StringUtils
+    
+	lbl2.TextSize = FontSize
+	Height = stu.MeasureMultilineTextHeight(lbl2, txt2)
+	Do While Height > lbl2.Height And FontSize > MinFontSize
+		FontSize = FontSize - 1
+		lbl2.TextSize = FontSize
+		Height = stu.MeasureMultilineTextHeight(lbl2, txt2)
+	Loop
+End Sub
+Sub ConfigureViews()
+	ImageView1.Left=0
+	ImageView1.Top=0
+	ImageView1.Width=100%x
+	ImageView1.Height=25%y
+	Label1.Left=0
+	Label1.Top = 30%y
+	Label1.Width =100%x
+	Label1.Height=20%y
+	SetLabelTextSize(Label1, Label1.Text, 20 ,1)
+	EditText1.Left=0
+	EditText1.Top = 50%y
+	EditText1.Width =100%x
+	EditText1.Height=20%y
+	SetEditTextSize(EditText1, 00000000000, 50 ,1)
+	Button1.Left=5%x
+	Button1.Top = 75%y
+	Button1.Width = 90%x
+	Button1.Height = 10%y
+	SetButtonTextSize(Button1, Button1.Text, 20 ,1)
+End Sub
+Sub WriteMap
+	Dim Map1 As Map
+	Map1.Initialize
+	Map1.Put("CardNumber" , EditText1.Text)
+	File.WriteMap(File.DirInternal, "key.dat", Map1)
+End Sub
+
+Sub ReadMap As String
+	Dim Map1 As Map
+	Map1 = File.ReadMap(File.DirInternal, "key.dat")
+	Map1.GetKeyAt(0)
+	Return Map1.GetValueAt(0)
+End Sub
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("BaseLayout")
+	ConfigureViews
+	If File.Exists(File.DirInternal, "key.dat") Then EditText1.Text=ReadMap
+End Sub
+
+Sub Activity_Resume
+
+End Sub
+
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+
+Sub Button1_Click
+	If EditText1.Text <> "" Then 
+		WriteMap 
+		ToastMessageShow("Номер карты сохранён. Разместите виджет на домашнем экране",True) 
+		Activity.Finish
+	Else 
+		ToastMessageShow("Введите номер карты",False)
+	End If
+End Sub

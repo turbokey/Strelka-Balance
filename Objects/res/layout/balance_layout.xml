@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent">
+  <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="horizontal" android:gravity="center" android:layout_x="0dp" android:layout_y="0dp">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:orientation="vertical" android:gravity="center" android:layout_gravity="center_vertical">
+      <AbsoluteLayout android:id="@+id/balance_panel1" android:layout_width="320dp" android:layout_height="150dp" android:layout_x="0dp" android:layout_y="0dp" android:visibility="visible" android:background="@drawable/balance_panel1_background">
+        <TextView android:id="@+id/balance_label1" android:layout_width="300dp" android:layout_height="70dp" android:layout_x="10dp" android:layout_y="70dp" android:visibility="visible" android:text="Загрузка..." android:gravity="center_vertical|center_horizontal" android:textColor="#FFFFFFFF" android:textSize="55dp" android:textStyle="normal" android:typeface="normal" />
+        <TextView android:id="@+id/balance_label2" android:layout_width="300dp" android:layout_height="30dp" android:layout_x="10dp" android:layout_y="40dp" android:visibility="visible" android:text="Ваш баланс:" android:gravity="center_vertical|center_horizontal" android:textColor="#FFFFFFFF" android:textSize="20dp" android:textStyle="bold" android:typeface="normal" />
+        <ImageView android:scaleType="fitXY" android:id="@+id/balance_imageview1" android:layout_width="20dp" android:layout_height="20dp" android:layout_x="290dp" android:layout_y="10dp" android:visibility="visible" />
+        <TextView android:id="@+id/balance_label3" android:layout_width="300dp" android:layout_height="30dp" android:layout_x="10dp" android:layout_y="10dp" android:visibility="visible" android:text="" android:gravity="center_vertical|center_horizontal" android:textColor="#FFFFFF00" android:textSize="20dp" android:textStyle="bold" android:typeface="normal" />
+      </AbsoluteLayout>
+    </LinearLayout>
+  </LinearLayout>
+</AbsoluteLayout>
